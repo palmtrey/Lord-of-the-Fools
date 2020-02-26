@@ -8,20 +8,30 @@ classdef unit
         attack
         defense
         commandPointGen
+        
+        unitImage matlab.ui.control.Image
     end
     
     methods
-        function obj = unit(figure, s, z)
+        function obj = unit(figure, s, z, unitType)
             % Class constructor
-            %   Takes in grid coordinates s and z to set an initial
-            %   location for the created unit.
+            %   figure is the figure to place on (app.UIFigure)
+            %   s and z are initial grid coordinates for the unit
+            %   unitType is the type of unit (testUnit, etc.)
             
             unitImage = uiimage(figure);
             [unitImage.Position(1), unitImage.Position(2)] = leftCornerCoords(s, z);
-            unitImage.Position(3:4) = [43, 40]
+            unitImage.Position(3:4) = [43, 40];
             
             obj.location(1:2) = [s, z];
             obj.locationxy(1:2) = leftCornerCoords(s, z);
+            
+            if (strcmp(unitType, 'testUnit'))
+                unitImage.ImageSource = 'testUnit.png';
+                obj.attack = 1;
+                obj.defense = 1;
+                obj.commandPointGen = 1;
+            end
         end
         
         function move(s, z)
@@ -30,6 +40,7 @@ classdef unit
             
             obj.location(1:2) = [s, z];
         end
+        
     end
 end
 

@@ -50,14 +50,18 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             app.Grid.ImageSource = 'grid.png';
             
             % Create a test unit
+            %{
             testUnit = uiimage(app.UIFigure);
             [testUnit.Position(1), testUnit.Position(2)] = leftCornerCoords(4,2);
             testUnit.Position(1) = testUnit.Position(1);
             testUnit.Position(2) = testUnit.Position(2);
             testUnit.Position(3:4) = [43 40];
             testUnit.ImageSource = 'testUnit.png';
+            %}
+            
+            testUnit = unit(app.UIFigure, 1, 3, 'testUnit');
            
-            % Create all movement indicators and set to invisible
+            % Create all movement indicators (225 for 15x15 grid) and set to invisible
             movementIndicators = gobjects(15);
             
             for i = 1:15
