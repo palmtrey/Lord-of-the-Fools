@@ -31,32 +31,7 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             pointRelUI = get(0, 'PointerLocation') - app.UIFigure.Position(1:2);
             [s, z] = convertCoords(pointRelUI(1), pointRelUI(2));
             
-            if (s == 1 && z == 1)
-                redSquare1 = uiimage(app.UIFigure);
-                redSquare1.Position(1:2) = [769 12];
-                redSquare1.Position(3:4) = [53 50];
-                redSquare1.ImageSource = 'blueCircle.png';
-                addprop(redSquare1, 'coordinates');
-                redSquare1.coordinates = [1,1];
-            end
-            if (s == 2 && z == 2)
-                redSquare2 = uiimage(app.UIFigure);
-                redSquare2.Position = [67 63 53 50];
-                redSquare2.ImageSource = 'redSquare.png';
-            end
-            if (s == 2 && z == 1)
-               blueCircle1 = uiimage(app.UIFigure);
-               blueCircle1.Position = [72 17 43 40];
-               blueCircle1.ImageSource = 'blueCircle.png';
-               
-            end
-            if (s == 1 && z == 2)
-               blueCircle3 = uiimage(app.UIFigure);
-               blueCircle3.Position = [13 63 53 50];
-               blueCircle3.ImageSource = 'blueCircle.png';
-            end
-            disp(s);
-            disp(z);
+            
         end
     end
     
@@ -74,12 +49,29 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             app.Grid.Position = [1 9 833 772];
             app.Grid.ImageSource = 'grid.png';
             
+            % Create a test unit
+            testUnit = uiimage(app.UIFigure);
+            [testUnit.Position(1), testUnit.Position(2)] = leftCornerCoords(4,2);
+            testUnit.Position(1) = testUnit.Position(1);
+            testUnit.Position(2) = testUnit.Position(2);
+            testUnit.Position(3:4) = [43 40];
+            testUnit.ImageSource = 'testUnit.png';
+           
             % Create all movement indicators and set to invisible
             movementIndicators = gobjects(15);
-            movementIndicators(3,2) = uiimage(app.UIFigure); 
-            movementIndicators(3,2).Position = [126 68 43 40];
-            movementIndicators(3,2).ImageSource = 'blueCircle.png';
-
+            
+            for i = 1:15
+                for j = 1:15
+                    movementIndicators(i,j) = uiimage(app.UIFigure);
+                    [movementIndicators(i,j).Position(1), movementIndicators(i,j).Position(2)] = leftCornerCoords(i, j);
+                    movementIndicators(i,j).Position(1) = movementIndicators(i,j).Position(1);
+                    movementIndicators(i,j).Position(2) = movementIndicators(i,j).Position(2);
+                    movementIndicators(i,j).Position(3:4) = [43 40];
+                    movementIndicators(i,j).ImageSource = 'blueCircle.png';
+                    movementIndicators(i,j).Visible = 'off';
+                end
+            end
+   
             % Show figure after all components created
             app.UIFigure.Visible = 'on';
         end

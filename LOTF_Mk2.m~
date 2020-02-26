@@ -33,7 +33,8 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             
             if (s == 1 && z == 1)
                 redSquare1 = uiimage(app.UIFigure);
-                redSquare1.Position = [13 12 53 50];
+                redSquare1.Position(1:2) = leftCornerCoords(10,10);
+                redSquare1.Position(3:4) = [53 50];
                 redSquare1.ImageSource = 'blueCircle.png';
                 addprop(redSquare1, 'coordinates');
                 redSquare1.coordinates = [1,1];
@@ -51,7 +52,8 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             end
             if (s == 1 && z == 2)
                blueCircle3 = uiimage(app.UIFigure);
-               blueCircle3.
+               blueCircle3.Position = [13 63 53 50];
+               blueCircle3.ImageSource = 'blueCircle.png';
             end
             disp(s);
             disp(z);
@@ -74,7 +76,18 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             
             % Create all movement indicators and set to invisible
             movementIndicators = gobjects(15);
-            movementIndicators(3,2) = uiimage(app.UIFigure); 
+            
+            for i = 1:15
+                j=1
+                    movementIndicators(i,j) = uiimage(app.UIFigure);
+                    [movementIndicators(i,j).Position(1), movementIndicators(i,j).Position(2)] = leftCornerCoords(i, j);
+                    movementIndicators(i,j).Position(3:4) = [42 10];
+                    movementIndicators(i,j).ImageSource = 'blueCircle.png';
+                
+            end
+            
+            
+            movementIndicators(3,2) = uiimage(app.UIFigure);
             movementIndicators(3,2).Position = [126 68 43 40];
             movementIndicators(3,2).ImageSource = 'blueCircle.png';
 

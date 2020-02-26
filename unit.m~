@@ -1,0 +1,26 @@
+classdef unit
+    % unit defines properties and methods used in the creation and function
+    % of any unit in LOTF
+    
+    properties
+        location 
+        attack
+        defense
+    end
+    
+    methods
+        function obj = unit(s, z)
+            % Class constructor
+            %   Takes in grid coordinates s and z to set an initial
+            %   location for the created unit.
+            obj.location
+        end
+        
+        function outputArg = method1(obj,inputArg)
+            %METHOD1 Summary of this method goes here
+            %   Detailed explanation goes here
+            outputArg = obj.Property1 + inputArg;
+        end
+    end
+end
+
