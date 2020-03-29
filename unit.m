@@ -1,5 +1,5 @@
 classdef unit
-    % unit defines properties and methods used in the creation and function
+    % This class defines properties and methods used in the creation and function
     % of any unit in LOTF
     
     properties

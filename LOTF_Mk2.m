@@ -31,7 +31,10 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             pointRelUI = get(0, 'PointerLocation') - app.UIFigure.Position(1:2);
             [s, z] = convertCoords(pointRelUI(1), pointRelUI(2));
             
+            disp(pointRelUI);
             
+            disp(s);
+            disp(z);
         end
     end
     
