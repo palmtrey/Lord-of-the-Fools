@@ -5,7 +5,7 @@
 % 
 % Developers: Cameron Palmer and Henry Haggart
 %
-% Last Modified: Wednesday, February 26th, 2020
+% Last Modified: Tuesday, March 31st, 2020 by Cameron Palmer
 %
 %
 % Notes:
@@ -19,6 +19,7 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
            
            UIFigure matlab.ui.Figure
            Grid matlab.ui.control.Image
+           Overlay matlab.ui.control.Image
            
     end
     
@@ -33,6 +34,10 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             
             disp("X/Y Coordinates: " + pointRelUI(1) + " " + pointRelUI(2));
             disp("S/Z Coordinates: " + s + " " + z);
+        end
+        
+        function overlayClicked(app, event)
+            
         end
     end
     
@@ -49,20 +54,23 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             app.Grid = uiimage(app.UIFigure);
             app.Grid.ImageClickedFcn = createCallbackFcn(app, @gridImageClicked, true);
             app.Grid.Position = [1 9 833 772];
-            app.Grid.ImageSource = 'grid.png';
+            app.Grid.ImageSource = 'images/grid.png';
             
-            % Create a test unit
-            %{
-            testUnit = uiimage(app.UIFigure);
-            [testUnit.Position(1), testUnit.Position(2)] = leftCornerCoords(4,2);
-            testUnit.Position(1) = testUnit.Position(1);
-            testUnit.Position(2) = testUnit.Position(2);
-            testUnit.Position(3:4) = [43 40];
-            testUnit.ImageSource = 'testUnit.png';
-            %}
+            % Create Overlay
+            app.Overlay = uiimage(app.UIFigure);
+            app.Overlay.ImageClickedFcn = createCallbackFcn(app, @overlayClicked, true);
+            app.Overlay.Position = [1 9 833 772];
+            app.Overlay.ImageSource = 'images/transparent_overlay.png';
+            
             
             testUnit = unit(app.UIFigure, 1, 3, 'testUnit');
+            
+            
+            location = findOverlay(app.UIFigure);
            
+            app.UIFigure.Children(length(app.UIFigure.Children) + 1) = app.UIFigure.Children(location);
+            
+            
             % Create all movement indicators (225 for 15x15 grid) and set to invisible
             movementIndicators = gobjects(15);
             
@@ -73,7 +81,7 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
                     movementIndicators(i,j).Position(1) = movementIndicators(i,j).Position(1);
                     movementIndicators(i,j).Position(2) = movementIndicators(i,j).Position(2);
                     movementIndicators(i,j).Position(3:4) = [43 40];
-                    movementIndicators(i,j).ImageSource = 'blueCircle.png';
+                    movementIndicators(i,j).ImageSource = 'images/targeting_images/blueCircle.png';
                     movementIndicators(i,j).Visible = 'off';
                 end
             end

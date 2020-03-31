@@ -27,7 +27,7 @@ classdef unit
             obj.locationxy(1:2) = leftCornerCoords(s, z);
             
             if (strcmp(unitType, 'testUnit'))
-                unitImage.ImageSource = 'testUnit.png';
+                unitImage.ImageSource = 'images/units/testUnit.png';
                 obj.attack = 1;
                 obj.defense = 1;
                 obj.commandPointGen = 1;
