@@ -31,10 +31,8 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             pointRelUI = get(0, 'PointerLocation') - app.UIFigure.Position(1:2);
             [s, z] = convertCoords(pointRelUI(1), pointRelUI(2));
             
-            disp(pointRelUI);
-            
-            disp(s);
-            disp(z);
+            disp("X/Y Coordinates: " + pointRelUI(1) + " " + pointRelUI(2));
+            disp("S/Z Coordinates: " + s + " " + z);
         end
     end
     
@@ -44,7 +42,8 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             % Create UIFigure and hide until all components are created
             app.UIFigure = uifigure('Visible', 'off');
             app.UIFigure.Position = [100 100 833 780];
-            app.UIFigure.Name = 'UI Figure';
+            app.UIFigure.Name = 'UI Figure'; % Name the ui figure "UI Figure"
+            app.UIFigure.Resize = 'off'; % Make the figure non-resizeable
 
             % Create Grid Image
             app.Grid = uiimage(app.UIFigure);
