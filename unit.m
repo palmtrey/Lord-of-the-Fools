@@ -19,14 +19,14 @@ classdef unit
             %   unitType is the type of unit (testUnit, etc.)
             
             obj.location(1:2) = [s, z];
-            unitImage = uiimage(figure);
-            obj.updateLocation();
-            unitImage.Position(3:4) = [43, 40]; % Set size of unit
+            obj.unitImage = uiimage(figure);
+            [obj.unitImage.Position(1),obj.unitImage.Position(2)] = leftCornerCoords(obj.location(1),obj.location(2));
+            obj.unitImage.Position(3:4) = [43, 40]; % Set size of unit
             
             
             
             if (strcmp(unitType, 'testUnit'))
-                unitImage.ImageSource = 'images/units/testUnit.png';
+                obj.unitImage.ImageSource = 'images/units/testUnit.png';
                 obj.attack = 1;
                 obj.defense = 1;
                 obj.commandPointGen = 1;
@@ -46,8 +46,10 @@ classdef unit
         
     
     methods (Static, Access = public)
-        function updateLocation()
-            [unitImage.Position(1), unitImage.Position(2)] = obj.location(1:2);
+        function updateLocation(loc)
+            disp(loc);
+            [obj.unitImage.Position(1), obj.unitImage.Position(2)] = leftCornerCoords(loc(1),loc(2));
+            
         end
     end
 end
