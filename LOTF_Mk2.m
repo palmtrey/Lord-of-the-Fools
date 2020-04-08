@@ -20,24 +20,24 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
            UIFigure matlab.ui.Figure
            Grid matlab.ui.control.Image
            Overlay matlab.ui.control.Image
-           
+           testUnit
     end
     
     % Callbacks that handle component events
     methods (Access = private)
         
         % Callback function for the grid image
-        function gridImageClicked(app, event)
+        
+        
+        function overlayClicked(app, event)
             % Find where the pointer is relative to the UI
             pointRelUI = get(0, 'PointerLocation') - app.UIFigure.Position(1:2);
             [s, z] = convertCoords(pointRelUI(1), pointRelUI(2));
             
             disp("X/Y Coordinates: " + pointRelUI(1) + " " + pointRelUI(2));
             disp("S/Z Coordinates: " + s + " " + z);
-        end
-        
-        function overlayClicked(app, event)
             
+            app.testUnit.move(s,z);
         end
     end
     
@@ -52,35 +52,30 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
 
             % Create Grid Image
             app.Grid = uiimage(app.UIFigure);
-            app.Grid.ImageClickedFcn = createCallbackFcn(app, @gridImageClicked, true);
             app.Grid.Position = [1 9 833 772];
             app.Grid.ImageSource = 'images/grid.png';
             
             % Create Overlay
             app.Overlay = uiimage(app.UIFigure);
-            app.Overlay.ImageClickedFcn = createCallbackFcn(app, @overlayClicked, true);
+            app.Overlay.ImageClickedFcn = createCallbackFcn(app, @overlayClicked);
             app.Overlay.Position = [1 9 833 772];
             app.Overlay.ImageSource = 'images/transparent_overlay.png';
             
             
-            testUnit = unit(app.UIFigure, 1, 3, 'testUnit');
+            app.testUnit = unit(app.UIFigure, 5, 5, 'testUnit'); %Create a test unit
             
-            
-            location = findOverlay(app.UIFigure);
-           
-            app.UIFigure.Children(length(app.UIFigure.Children) + 1) = app.UIFigure.Children(location);
+            % Bring overlay to top
+            app.UIFigure.Children = toTop(app.UIFigure.Children,findOverlay(app.UIFigure.Children));
             
             
             % Create all movement indicators (225 for 15x15 grid) and set to invisible
-            movementIndicators = gobjects(15);
+            movementIndicators = gobjects(15); %Creates an empty array of graphics objects
             
             for i = 1:15
                 for j = 1:15
                     movementIndicators(i,j) = uiimage(app.UIFigure);
-                    [movementIndicators(i,j).Position(1), movementIndicators(i,j).Position(2)] = leftCornerCoords(i, j);
-                    movementIndicators(i,j).Position(1) = movementIndicators(i,j).Position(1);
-                    movementIndicators(i,j).Position(2) = movementIndicators(i,j).Position(2);
-                    movementIndicators(i,j).Position(3:4) = [43 40];
+                    [movementIndicators(i,j).Position(1), movementIndicators(i,j).Position(2)] = leftCornerCoords(i, j); % Set position of movement indicators
+                    movementIndicators(i,j).Position(3:4) = [43 40]; % Set size of movement indicators
                     movementIndicators(i,j).ImageSource = 'images/targeting_images/blueCircle.png';
                     movementIndicators(i,j).Visible = 'off';
                 end

@@ -1,11 +1,13 @@
-function index = findOverlay(figure)
-% This function finds where the overlay is located in "figure"'s children
-% and returns the index
+function index = findOverlay(children)
+% FindOverlay(children) takes in an array of images children and finds
+% which image has the ImageSource property equal to
+% "images/transparent_overlay.png", effectively finding the location of the
+% transparent overlay within the array children.
 
-    value = length(figure.Children);
+    value = length(children);
     for i = 1:value
         
-        if figure.Children(i).ImageSource == "images/transparent_overlay.png"
+        if children(i).ImageSource == "images/transparent_overlay.png"
             index = i;
             
         end
