@@ -5,7 +5,7 @@
 % 
 % Developers: Cameron Palmer and Henry Haggart
 %
-% Last Modified: Tuesday, March 31st, 2020 by Cameron Palmer
+% Last Modified: Tuesday, April 14, 2020 by Cameron Palmer
 %
 %
 % Notes:
@@ -30,7 +30,6 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
         
         
         function overlayClicked(app, event)
-            disp("Hi!");
             % Find where the pointer is relative to the UI
             pointRelUI = get(0, 'PointerLocation') - app.UIFigure.Position(1:2);
             [s, z] = convertCoords(pointRelUI(1), pointRelUI(2));
@@ -38,8 +37,10 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             disp("X/Y Coordinates: " + pointRelUI(1) + " " + pointRelUI(2));
             disp("S/Z Coordinates: " + s + " " + z);
             
-            app.testUnit.location(1:2) = [s,z];
-            [app.testUnit.unitImage.Position(1), app.testUnit.unitImage.Position(2)] = leftCornerCoords(s,z);
+            if validateCoords(s,z)
+                app.testUnit.location(1:2) = [s,z];
+                [app.testUnit.unitImage.Position(1), app.testUnit.unitImage.Position(2)] = leftCornerCoords(s,z);
+            end
         end
     end
     

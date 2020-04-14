@@ -2,9 +2,12 @@ function [s, z] = convertCoords(x, y)
 %The function convertCoords takes in a pair of coordinates x(13:810) and y(10:780) and
 %returns the corresponding grid location s(1:15) and z(1:15)
     
+    s=0;
+    z=0;
+
     go = true;
     i = 0;
-    while(go)
+    for i = 0:14
        checkX = (x-13-2*i)/52;
        if all(checkX > i & checkX < i + 1)
            s = i + 1;
@@ -16,7 +19,7 @@ function [s, z] = convertCoords(x, y)
 
     go = true;
     j = 0;
-    while(go)
+    for j = 0:14
         checkY = (y-10-2*j)/50;
         if all(checkY > j & checkY < j + 1)
             z = j + 1;
@@ -26,7 +29,5 @@ function [s, z] = convertCoords(x, y)
         end
         
     end
-    
-    
 end
 
