@@ -30,6 +30,7 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
         
         
         function overlayClicked(app, event)
+            disp("Hi!");
             % Find where the pointer is relative to the UI
             pointRelUI = get(0, 'PointerLocation') - app.UIFigure.Position(1:2);
             [s, z] = convertCoords(pointRelUI(1), pointRelUI(2));
