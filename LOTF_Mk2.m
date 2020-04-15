@@ -31,8 +31,9 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
         
         
         function overlayClicked(app, event)
+            
             % Find where the pointer is relative to the UI
-            pointRelUI = get(0, 'PointerLocation') - app.UIFigure.Position(1:2);
+            pointRelUI = get(0, "PointerLocation") - app.UIFigure.Position(1:2);
             [s, z] = convertCoords(pointRelUI(1), pointRelUI(2));
             
             disp("X/Y Coordinates: " + pointRelUI(1) + " " + pointRelUI(2));
@@ -60,10 +61,10 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             
             
             % Create UIFigure and hide until all components are created
-            app.UIFigure = uifigure('Visible', 'off');
+            app.UIFigure = uifigure("Visible", "off");
             app.UIFigure.Position = [100 100 833 780];
-            app.UIFigure.Name = 'UI Figure'; % Name the ui figure "UI Figure"
-            app.UIFigure.Resize = 'off'; % Make the figure non-resizeable
+            app.UIFigure.Name = "UI Figure"; % Name the ui figure "UI Figure"
+            app.UIFigure.Resize = "off"; % Make the figure non-resizeable
 
             % Create Grid Image
             app.Grid = uiimage(app.UIFigure);
@@ -77,10 +78,10 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             app.Overlay.ImageSource = "images" + app.divider + "transparent_overlay.png";
             
             
-            app.testUnit = unit(app.UIFigure, 5, 5, 'testUnit', app.divider); %Create a test unit
+            app.testUnit = unit(app.UIFigure, 5, 5, "testUnit", app.divider); %Create a test unit
             
             % Bring overlay to top
-            app.UIFigure.Children = toTop(app.UIFigure.Children,findOverlay(app.UIFigure.Children));
+            app.UIFigure.Children = toTop(app.UIFigure.Children,findOverlay(app.UIFigure.Children, app.divider));
             
             
             % Create all movement indicators (225 for 15x15 grid) and set to invisible
@@ -92,12 +93,12 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
                     [movementIndicators(i,j).Position(1), movementIndicators(i,j).Position(2)] = leftCornerCoords(i, j); % Set position of movement indicators
                     movementIndicators(i,j).Position(3:4) = [43 40]; % Set size of movement indicators
                     movementIndicators(i,j).ImageSource = "images" + app.divider + "targeting_images" + app.divider + "blueCircle.png";
-                    movementIndicators(i,j).Visible = 'off';
+                    movementIndicators(i,j).Visible = "off";
                 end
             end
    
             % Show figure after all components created
-            app.UIFigure.Visible = 'on';
+            app.UIFigure.Visible = "on";
         end
     end
     
