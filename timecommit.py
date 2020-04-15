@@ -7,9 +7,9 @@ import os
 from datetime import datetime
 from datetime import date as dt
 
-choice = input("Would you like name, time and date for your commit (1), or an alternate message? (2)\n>")
+choice = int(input("Would you like name, time and date for your commit (1), or an alternate message? (2)\n>"))
 
-if (choice == "1"):
+if (choice == 1):
 	name = input("Enter your name\n > ")
 	today = dt.today()
 	d2 = today.strftime("%B %d, %Y")
@@ -22,9 +22,9 @@ if (choice == "1"):
 	os.system("git push origin master")
 
 elif (choice == 2):
-	message = input("Enter a commit message")
+	message = input("Enter a commit message\n>")
 	os.system("git add .")
-	os.system("git commit -m " + message)
+	os.system("git commit -m " + '"' +  message + '"')
 	os.system("git push origin master")	
 else:
 	print("You failed!")
