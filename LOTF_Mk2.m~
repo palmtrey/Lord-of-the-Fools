@@ -36,44 +36,39 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
         
         % Callback function for the grid image
         function overlayClicked(app, event)
-            
             % Find where the pointer is relative to the UI
             pointRelUI = get(0, "PointerLocation") - app.UIFigure.Position(1:2);
             [s, z] = convertCoords(pointRelUI(1), pointRelUI(2));
             
-            % Debugging purposes
-            %disp("X/Y Coordinates: " + pointRelUI(1) + " " + pointRelUI(2));
-            %disp("S/Z Coordinates: " + s + " " + z);
+            disp("X/Y Coordinates: " + pointRelUI(1) + " " + pointRelUI(2));
+            disp("S/Z Coordinates: " + s + " " + z);
             
             
             if(validateCoords(s,z)) % Validate the coordinates
                 if app.tileOccupied(s,z) == true % Check if a unit is at the coordinates (s,z)
-
+                    
+                    disp("Tile is occupied");
+                    
                     % Find which unit is on this tile
                     selectedUnit = whichUnit(app.existingUnits, s, z);
-
-                    if selectedUnit.selected == false
-                        
-                        % Select the unit
+                    
+                    if selectedUnit.selected == false % Select the unit
                         selectUnit(app,s,z,selectedUnit);
-                        disp(selectedUnit.unitId);
                         
-                    else
                         
-                        % Deselect the unit
-                        deselectUnit(app,s,z,selectedUnit);
+                    else                             % Deselect the unit
+                        
                         
                     end
                 end
             end
             
-            
-            
             % Move existingUnit(1), the first testUnit, to clicked location
-            [app.tileOccupied, app.existingUnits] = moveUnit(app.existingUnits(2), s, z, app.tileOccupied, app.existingUnits);
-            
-            
-            
+            app.tileOccupied(app.existingUnits(1).location(1),app.existingUnits(1).location(2)) = false;
+            moveUnit(app.existingUnits(1), s, z);
+            app.existingUnits(1).location(1) = s;
+            app.existingUnits(1).location(2) = z;
+            app.tileOccupied(s,z) = true;
             
             
             
@@ -92,12 +87,16 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
                 app.divider = '/';
             end
             
-            % Initialize values of tileOccupied
+            % Initialize values for tileOccupied
             for i = 1:15
                 for j = 1:15
                     app.tileOccupied(i,j) = false;
                 end
             end
+            
+            
+            
+            
             
             
             % Create UIFigure and hide until all components are created
@@ -169,33 +168,28 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
                 end
                 
             end
-            
-            % Change status to selected
-            app.existingUnits(selectedUnit.unitId).selected = true;
-            
         end
         
         function deselectUnit(app,s,z,selectedUnit)
             
-            % Turn off highlighter underneath unit and reset image
-            app.movementIndicators(s,z).ImageSource = "images" + app.divider + "targeting_images" + app.divider + "blueCircle.png";
+            % Turn off highlighter underneath unit
+            app.movementIndicators(s,z).ImageSource = "images" + app.divider + "targeting_images" + app.divider + "highlight.png";
             app.movementIndicators(s,z).Visible = "off";
             
-            %Calculate the correct tiles to unhighlight
+            %Calculate the correct tiles to highlight
             [movementTilesS, movementTilesZ] = getMovementTiles(selectedUnit.movementRange,s, z);
             
-            % Hide movement indicators
+            disp(movementTilesS);
+            disp(movementTilesZ);
+            
+            % Display movement indicators
             for i = 1:length(movementTilesS)
                 try
-                    app.movementIndicators(movementTilesS(i),movementTilesZ(i)).Visible = "off";
+                    app.movementIndicators(movementTilesS(i),movementTilesZ(i)).Visible = "on";
                 catch
                 end
                 
             end
-            
-            
-            % Change status to not selected
-            app.existingUnits(selectedUnit.unitId).selected = false;
         end
         
     end

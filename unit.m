@@ -10,6 +10,8 @@ classdef unit
         commandPointGen
         movementRange
         unitImage matlab.ui.control.Image
+        unitId
+        selected
     end
     
     methods
@@ -27,6 +29,8 @@ classdef unit
             [obj.unitImage.Position(1),obj.unitImage.Position(2)] = leftCornerCoords(obj.location(1),obj.location(2));
             obj.unitImage.Position(3:4) = [43, 40]; % Set size of unit
             
+            obj.selected = false;
+            
             
             
             if (strcmp(unitType, "testUnit"))
@@ -34,7 +38,8 @@ classdef unit
                 obj.attack = 1;
                 obj.defense = 1;
                 obj.commandPointGen = 1;
-                obj.movementRange = 2;
+                obj.movementRange = 3;
+                obj.unitId = 1;
             end
             
             if(strcmp(unitType, "testUnit2"))
@@ -43,7 +48,9 @@ classdef unit
                 obj.defense = 1;
                 obj.commandPointGen = 1;
                 obj.movementRange = 2;
+                obj.unitId = 2;
             end
+          
         end
         
     end

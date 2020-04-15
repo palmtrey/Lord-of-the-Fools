@@ -6,7 +6,7 @@ function theUnit = whichUnit(existingUnits,s,z)
 for i = 1:length(existingUnits)
     if existingUnits(i).location(1) == s && existingUnits(i).location(2) == z
         theUnit = existingUnits(i);
-        break;
+        
     else
         theUnit = 0;
     end
