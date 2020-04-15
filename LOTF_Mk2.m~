@@ -48,8 +48,7 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
     % Component Init
     methods (Access = private)
         function createComponents(app)
-            % Determine what divider to use for file input
-            % This changes if the host system is a PC or a Mac
+            % Determine what divider to use for files
             if ispc
                 app.divider = '\';
             end
@@ -74,10 +73,10 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             app.Overlay = uiimage(app.UIFigure);
             app.Overlay.ImageClickedFcn = createCallbackFcn(app, @overlayClicked);
             app.Overlay.Position = [1 9 833 772];
-            app.Overlay.ImageSource = "images" + app.divider + "transparent_overlay.png";
+            app.Overlay.ImageSource = "images" + app.divider+ "transparent_overlay.png";
             
             
-            app.testUnit = unit(app.UIFigure, 5, 5, 'testUnit', app.divider); %Create a test unit
+            app.testUnit = unit(app.UIFigure, 5, 5, 'testUnit'); %Create a test unit
             
             % Bring overlay to top
             app.UIFigure.Children = toTop(app.UIFigure.Children,findOverlay(app.UIFigure.Children));
@@ -91,7 +90,7 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
                     movementIndicators(i,j) = uiimage(app.UIFigure);
                     [movementIndicators(i,j).Position(1), movementIndicators(i,j).Position(2)] = leftCornerCoords(i, j); % Set position of movement indicators
                     movementIndicators(i,j).Position(3:4) = [43 40]; % Set size of movement indicators
-                    movementIndicators(i,j).ImageSource = "images" + app.divider + "targeting_images" + app.divider + "blueCircle.png";
+                    movementIndicators(i,j).ImageSource = "images" + app.dividtargeting_images/blueCircle.png';
                     movementIndicators(i,j).Visible = 'off';
                 end
             end

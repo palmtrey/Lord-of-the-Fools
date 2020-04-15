@@ -7,13 +7,24 @@ import os
 from datetime import datetime
 from datetime import date as dt
 
-name = input("Enter your name\n > ")
-today = dt.today()
-d2 = today.strftime("%B %d, %Y")
+choice = input("Would you like name, time and date for your commit (1), or an alternate message? (2)\n>")
 
-now = datetime.now()
-time_string = now.strftime("%H:%M:%S")
+if (choice == "1"):
+	name = input("Enter your name\n > ")
+	today = dt.today()
+	d2 = today.strftime("%B %d, %Y")
 
-os.system("git add .")
-os.system("git commit -m " + "'Commit by " + name + " on " + d2 + " " + time_string +  "'")
-os.system("git push origin master")
+	now = datetime.now()
+	time_string = now.strftime("%H:%M:%S")
+
+	os.system("git add .")
+	os.system("git commit -m " + "'Commit by " + name + " on " + d2 + " " + time_string +  "'")
+	os.system("git push origin master")
+
+elif (choice == 2):
+	message = input("Enter a commit message")
+	os.system("git add .")
+	os.system("git commit -m " + message)
+	os.system("git push origin master")	
+else:
+	print("You failed!")

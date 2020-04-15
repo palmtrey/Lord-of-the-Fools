@@ -12,7 +12,7 @@ classdef unit
     
     methods
         
-        function obj = unit(figure, s, z, unitType)
+        function obj = unit(figure, s, z, unitType, divider)
             % Class constructor
             %   figure is the figure to place on (app.UIFigure)
             %   s and z are initial grid coordinates for the unit
@@ -25,8 +25,8 @@ classdef unit
             
             
             
-            if (strcmp(unitType, 'testUnit'))
-                obj.unitImage.ImageSource = 'images/units/testUnit.png';
+            if (strcmp(unitType, "testUnit"))
+                obj.unitImage.ImageSource = "images" + divider + "units" + divider + "testUnit.png";
                 obj.attack = 1;
                 obj.defense = 1;
                 obj.commandPointGen = 1;
