@@ -26,7 +26,7 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
         testUnit                         % A test unit
         testUnit2
         divider                          % System-specific. Takes the val '\' if on Windows, '/' if on Mac.
-        tileOccupied = [15,15]           % A bool array to tell if a unit is on a tile.
+        tileOccupied = [15,15]           % A bool array that keeps track of occupied tiles
         movementIndicators               % Blue movement icons
         existingUnits unit               % An array of existing units
     end
@@ -46,9 +46,8 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             %disp("S/Z Coordinates: " + s + " " + z);
             
             
-            if(validateCoords(s,z)) % Validate the coordinates
-                if app.tileOccupied(s,z) == true % Check if a unit is at the coordinates (s,z)
-
+            if(validateCoords(s,z)) && app.tileOccupied(s,z) == true % Validate the coordinates, and check if a unit is present
+                    
                     % Find which unit is on this tile
                     selectedUnit = whichUnit(app.existingUnits, s, z);
 
@@ -64,7 +63,6 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
                         deselectUnit(app,s,z,selectedUnit);
                         
                     end
-                end
             end
             
             
