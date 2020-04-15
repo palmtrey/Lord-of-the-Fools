@@ -39,10 +39,12 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             disp("X/Y Coordinates: " + pointRelUI(1) + " " + pointRelUI(2));
             disp("S/Z Coordinates: " + s + " " + z);
             
-            if validateCoords(s,z)
-                app.testUnit.location(1:2) = [s,z];
-                [app.testUnit.unitImage.Position(1), app.testUnit.unitImage.Position(2)] = leftCornerCoords(s,z);
-            end
+            moveUnit(app.testUnit, s, z);
+            
+            %if validateCoords(s,z)
+               % app.testUnit.location(1:2) = [s,z];
+                %[app.testUnit.unitImage.Position(1), app.testUnit.unitImage.Position(2)] = leftCornerCoords(s,z);
+            % end
         end
     end
     

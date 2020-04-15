@@ -33,13 +33,6 @@ classdef unit
             end
         end
         
-        function move(s, z)
-            % move(s, z) Changes a unit's location to given coordinates (s, z)
-            
-            obj.location(1:2) = [s, z];
-            updateLocation();
-        end
-        
     end
     
     
