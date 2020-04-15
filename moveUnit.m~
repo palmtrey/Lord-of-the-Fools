@@ -1,6 +1,0 @@
-function moveUnit(unit,s,z)
-%moveUnit(unit,s,z) moves a unit to the coordinates (s,z)
-    unit.location(1) = s;
-    
-end
-
