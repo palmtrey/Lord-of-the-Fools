@@ -5,7 +5,7 @@
 %
 % Developers: Cameron Palmer and Henry Haggart
 %
-% Last Modified: Tuesday, April 14, 2020 by Cameron Palmer
+% Last Modified: Thursday, April 23, 2020 by Cameron Palmer
 %
 %
 % Notes:
@@ -42,50 +42,46 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             pointRelUI = get(0, "PointerLocation") - app.UIFigure.Position(1:2);
             [s, z] = convertCoords(pointRelUI(1), pointRelUI(2));
             
-            
-            
             % Debugging purposes
             %disp("X/Y Coordinates: " + pointRelUI(1) + " " + pointRelUI(2));
             %disp("S/Z Coordinates: " + s + " " + z);
             
             
+            % Validate the coordinates
             
-            
-            
-            % If there is no unit at this tile, check if a movement
-            % indicator is visible here
-            if app.movementIndicators(s,z).Visible == "on"
-                %disp(app.targetedUnit);
-                % Deselect the unit
-                deselectUnit(app,app.targetedUnit.location(1),app.targetedUnit.location(2));
-                
-                % Move the targeted unit
-                [app.tileOccupied, app.existingUnits] = moveUnit(app.existingUnits(app.targetedUnit.unitId), s, z, app.tileOccupied, app.existingUnits);
-                
-            else
-                
-                % If there is a unit at this tile, toggle selection
-                
-                % Validate the coordinates, and check if a unit is present
-                if(validateCoords(s,z)) && app.tileOccupied(s,z) == true
+            if validateCoords(s,z)
+                 % If there is no unit at this tile, check if a movement
+                 %  indicator is visible here
+                if app.movementIndicators(s,z).Visible == "on" && app.tileOccupied(s,z) == false
                     
-                    % Find which unit is on this tile
-                    app.targetedUnit = whichUnit(app.existingUnits, s, z);
-                    disp(app.targetedUnit);
+                    % Deselect the unit
+                    deselectUnit(app,app.targetedUnit.location(1),app.targetedUnit.location(2));
                     
-                    if app.targetedUnit.selected == false
-                        % Select the unit
-                        selectUnit(app,s,z);
-                    else
-                        % Deselect the unit
-                        deselectUnit(app,s,z);
+                    % Move the targeted unit
+                    [app.tileOccupied, app.existingUnits] = moveUnit(app.existingUnits(app.targetedUnit.unitId), s, z, app.tileOccupied, app.existingUnits);
+                    
+                else
+                    
+                    % If there is a unit at this tile, toggle selection
+                    
+                    % Check if a unit is present
+                    if app.tileOccupied(s,z) == true
                         
+                        % Find which unit is on this tile
+                        app.targetedUnit = whichUnit(app.existingUnits, s, z);
+                        disp(app.targetedUnit);
+                        
+                        if app.targetedUnit.selected == false
+                            % Select the unit
+                            selectUnit(app,s,z);
+                        else
+                            % Deselect the unit
+                            deselectUnit(app,s,z);
+                            
+                        end
                     end
                 end
-                
-                
-                
-                
+
                 % Move existingUnit(1), the first testUnit, to clicked location
                 %[app.tileOccupied, app.existingUnits] = moveUnit(app.existingUnits(2), s, z, app.tileOccupied, app.existingUnits);
                 
@@ -213,6 +209,7 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             
             % Change status to not selected
             app.existingUnits(app.targetedUnit.unitId).selected = false;
+            clear app.targetedUnit;
         end
         
     end
