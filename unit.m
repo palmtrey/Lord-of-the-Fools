@@ -34,7 +34,7 @@ classdef unit
             
             
             if (strcmp(unitType, "testUnit"))
-                obj.unitImage.ImageSource = "images" + divider + "units" + divider + "testUnit.png";
+                obj.unitImage.ImageSource = "images" + divider + "units" + divider + "testUnit.png"; % Set the image source here
                 obj.attack = 1;
                 obj.defense = 1;
                 obj.commandPointGen = 1;
@@ -43,7 +43,7 @@ classdef unit
             end
             
             if(strcmp(unitType, "testUnit2"))
-                obj.unitImage.ImageSource = "images" + divider + "units" + divider + "testUnit2.png";
+                obj.unitImage.ImageSource = "images" + divider + "units" + divider + "testUnit2.png"; % Set the image source here
                 obj.attack = 1;
                 obj.defense = 1;
                 obj.commandPointGen = 1;

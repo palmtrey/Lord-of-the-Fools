@@ -122,7 +122,7 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             % Create Grid Image
             app.Grid = uiimage(app.UIFigure);
             app.Grid.Position = [1 9 833 772];
-            app.Grid.ImageSource = "images" + app.divider + "grid.png";
+            app.Grid.ImageSource = "images" + app.divider + "grid.png"; % SET GRID IMAGE HERE
             
             % Create all movement indicators (225 for 15x15 grid) and set to invisible
             app.movementIndicators = gobjects(15,15); % Creates an empty array of graphics objects
