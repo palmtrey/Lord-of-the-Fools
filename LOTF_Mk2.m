@@ -53,32 +53,38 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
                  % If there is no unit at this tile, check if a movement
                  %  indicator is visible here
                 if app.movementIndicators(s,z).Visible == "on" && app.tileOccupied(s,z) == false
-                    
-                    % Deselect the unit
-                    deselectUnit(app,app.targetedUnit.location(1),app.targetedUnit.location(2));
+                    disp(app.targetedUnit.unitId);
                     
                     % Move the targeted unit
                     [app.tileOccupied, app.existingUnits] = moveUnit(app.existingUnits(app.targetedUnit.unitId), s, z, app.tileOccupied, app.existingUnits);
+
+                    % Deselect the unit
+                    deselectUnit(app,app.targetedUnit.location(1),app.targetedUnit.location(2));
+                    
+                    
                     
                 else
                     
                     % If there is a unit at this tile, toggle selection
                     
                     % Check if a unit is present on this tile
-                    if app.tileOccupied(s,z) == true
+                    if app.tileOccupied(s,z)
                         
-                        
-                        disp(app.targetedUnit);
-                        
+                        % If a unit is already selected (and thus stored
+                        % in app.targetedUnit) and that unit is not the
+                        % unit located at (s,z) (the current coordinates
+                        % clicked on), then deselect the currently selected
+                        % unit stored in app.targetedUnit before selecting
+                        % the new unit at (s,z)
                         if(~isempty(app.targetedUnit) && whichUnit(app.existingUnits,s,z).unitId ~= app.targetedUnit.unitId)
-                            deselectUnit(app,s,z);
+                            deselectUnit(app,app.targetedUnit.location(1),app.targetedUnit.location(2));
                         end
                         
                         % Find which unit is on this tile
                         app.targetedUnit = whichUnit(app.existingUnits, s, z);
                         
                         
-                        if app.targetedUnit.selected == false
+                        if ~app.targetedUnit.selected
                             % Select the unit
                             selectUnit(app,s,z);
                         else

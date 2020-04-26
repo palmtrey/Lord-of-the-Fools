@@ -38,5 +38,36 @@ for i = 1:movement-1
     
 end
 
+if movement > 2
+    
+        sVals = [sVals, s + 1];
+        zVals = [zVals, z + 2];
+        
+        sVals = [sVals, s - 1];
+        zVals = [zVals, z + 2];
+        
+        
+        sVals = [sVals, s - 2];
+        zVals = [zVals, z + 1];
+        
+        sVals = [sVals, s - 2];
+        zVals = [zVals, z - 1];
+        
+        
+        sVals = [sVals, s + 1];
+        zVals = [zVals, z - 2];
+        
+        sVals = [sVals, s - 1];
+        zVals = [zVals, z - 2];
+        
+        
+        sVals = [sVals, s + 2];
+        zVals = [zVals, z + 1];
+        
+        sVals = [sVals, s + 2];
+        zVals = [zVals, z - 1];
+    
+end
+
 end
 
