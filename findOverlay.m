@@ -7,7 +7,7 @@ function index = findOverlay(children)
     value = length(children);
     for i = 1:value
         
-        if children(i).ImageSource == "images/transparent_overlay.png"
+        if children(i).ImageSource == "images\transparent_overlay.png"
             index = i;
             
         end
