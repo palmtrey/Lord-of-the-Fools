@@ -39,7 +39,6 @@ classdef unit
                 obj.defense = 1;
                 obj.commandPointGen = 1;
                 obj.movementRange = 3;
-                obj.unitId = 1;
             end
             
             if(strcmp(unitType, "testUnit2"))
@@ -48,8 +47,24 @@ classdef unit
                 obj.defense = 1;
                 obj.commandPointGen = 1;
                 obj.movementRange = 2;
-                obj.unitId = 2;
             end
+            
+            if(strcmp(unitType, "archer"))
+                obj.unitImage.ImageSource = "images" + divider + "units" + divider + "archer.png"; % Set the image source here
+                obj.attack = 3;
+                obj.defense = 1;
+                obj.commandPointGen = 1;
+                obj.movementRange = 3;
+            end
+            
+            if(strcmp(unitType, "pikeman"))
+                obj.unitImage.ImageSource = "images" + divider + "units" + divider + "pikeman.png"; % Set the image source here
+                obj.attack = 3;
+                obj.defense = 2;
+                obj.commandPointGen = 1;
+                obj.movementRange = 2;
+            end
+            
           
         end
         

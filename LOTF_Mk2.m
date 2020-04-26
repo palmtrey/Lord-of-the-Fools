@@ -23,8 +23,6 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
         UIFigure matlab.ui.Figure
         Grid matlab.ui.control.Image
         Overlay matlab.ui.control.Image
-        testUnit                         % A test unit
-        testUnit2
         divider                          % System-specific. Takes the val '\' if on Windows, '/' if on Mac.
         tileOccupied = [15,15]           % A bool array that keeps track of occupied tiles
         movementIndicators               % Blue movement icons
@@ -159,15 +157,15 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             
             
             % Create a test unit at (s,z) = (2,2)
-            app.testUnit = unit(app.UIFigure, 5, 5, "testUnit", app.divider); %Create a test unit
-            app.existingUnits(1) = app.testUnit; % Add to list of existing units
-            app.tileOccupied(5,5) = true;
+            app.existingUnits(1) = unit(app.UIFigure, 5, 5, "archer", app.divider); %Create a unit, add to existing units
+            app.existingUnits(1).unitId = 1; % Set the unit id
+            app.tileOccupied(5,5) = true; % Set the tile it spawns on to occupied
             
             
             % Create a second test unit at (s,z) = (5,2)
-            app.testUnit2 = unit(app.UIFigure, 5, 2, "testUnit2", app.divider); %Create a test unit
-            app.existingUnits(2) = app.testUnit2; % Add to list of existing units
-            app.tileOccupied(5,2) = true;
+            app.existingUnits(2) = unit(app.UIFigure, 5, 2, "pikeman", app.divider); %Create a unit, add to existing units
+            app.existingUnits(2).unitId = 2; % Set the unit id
+            app.tileOccupied(5,2) = true; % Set the tile it spawns on to occupied
             
             
             % Bring overlay to top
@@ -192,7 +190,9 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
             % Display movement indicators
             for i = 1:length(movementTilesS)
                 try
-                    app.movementIndicators(movementTilesS(i),movementTilesZ(i)).Visible = "on";
+                    if(~app.tileOccupied(movementTilesS(i), movementTilesZ(i)))
+                        app.movementIndicators(movementTilesS(i),movementTilesZ(i)).Visible = "on";
+                    end
                 catch
                 end
                 
