@@ -18,7 +18,7 @@ if (choice == 1):
 	time_string = now.strftime("%H:%M:%S")
 
 	os.system("git add .")
-	os.system("git commit -m " + "'Commit by " + name + " on " + d2 + " " + time_string +  "'")
+	os.system("git commit -m " + '"Commit by ' + name + ' on ' + d2 + ' ' + time_string +  '"')
 	os.system("git push origin master")
 
 elif (choice == 2):

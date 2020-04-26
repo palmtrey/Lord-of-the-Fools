@@ -64,19 +64,12 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
                     
                     % If there is a unit at this tile, toggle selection
                     
-                    % Check if a unit is present on this tile
+                    % Check if a unit is present
                     if app.tileOccupied(s,z) == true
-                        
-                        
-                        disp(app.targetedUnit);
-                        
-                        if(~isempty(app.targetedUnit) && whichUnit(app.existingUnits,s,z).unitId ~= app.targetedUnit.unitId)
-                            deselectUnit(app,s,z);
-                        end
                         
                         % Find which unit is on this tile
                         app.targetedUnit = whichUnit(app.existingUnits, s, z);
-                        
+                        disp(app.targetedUnit);
                         
                         if app.targetedUnit.selected == false
                             % Select the unit
