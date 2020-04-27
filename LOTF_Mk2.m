@@ -74,7 +74,10 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
                         % clicked on), then deselect the currently selected
                         % unit stored in app.targetedUnit before selecting
                         % the new unit at (s,z)
-                        if(~isempty(app.targetedUnit) && whichUnit(app.existingUnits,s,z).unitId ~= app.targetedUnit.unitId)
+                        
+                        unitToCompare = whichUnit(app.existingUnits,s,z);
+                        
+                        if(~isempty(app.targetedUnit) && unitToCompare.unitId ~= app.targetedUnit.unitId)
                             deselectUnit(app,app.targetedUnit.location(1),app.targetedUnit.location(2));
                         end
                         
