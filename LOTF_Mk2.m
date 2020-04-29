@@ -51,7 +51,7 @@ classdef LOTF_Mk2 < matlab.apps.AppBase
                  % If there is no unit at this tile, check if a movement
                  %  indicator is visible here
                 if app.movementIndicators(s,z).Visible == "on" && app.tileOccupied(s,z) == false
-                    disp(app.targetedUnit.unitId);
+                    
                     
                     % Move the targeted unit
                     [app.tileOccupied, app.existingUnits] = moveUnit(app.existingUnits(app.targetedUnit.unitId), s, z, app.tileOccupied, app.existingUnits);
